@@ -1,6 +1,6 @@
 -- init.sql
 -- Crea la base de datos
--- esto es un comentario
+
 CREATE DATABASE IF NOT EXISTS mydatabase;
 USE mydatabase;
 

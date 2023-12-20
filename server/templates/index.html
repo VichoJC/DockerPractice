@@ -1,24 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulario de Bienvenida</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <title>Amassssson Navideño    </title>
     <style>
-        /* Puedes agregar estilos CSS adicionales aquí si lo necesitas */
+        body {
+            background-color: #146b3a; 
+            color: #fffae6; 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #d4af37; 
+        }
+        form {
+            background-color: #bb2528; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        }
+        label, input {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #fffae6;
+            background-color: #fffae6;
+            color: #333;
+        }
+        input[type="submit"] {
+            background-color: #d4af37; 
+            color: #333;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #c9a028;
+        }
     </style>
 </head>
 <body>
-    <h1>Formulario de Bienvenida</h1>
+    <h1>Formulario de Amassssson Navideño     </h1>
     <form method="POST" action="/formulario">
-        <label for="nombre">Nombre:</label>
+        <label for="nombre"> Introduce tu nombre: </label>
         <input type="text" id="nombre" name="nombre" required>
         <br>
         <input type="submit" value="Enviar">
     </form>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        // Puedes agregar código Javascript adicional aquí si lo necesitas
+        document.querySelector('form').addEventListener('submit', function(event) {
+            alert('¡Feliz Navidad! Formulario enviado con éxito :) ');
+        });
     </script>
 </body>
 </html>
