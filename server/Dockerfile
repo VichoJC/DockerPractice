@@ -1,27 +1,18 @@
-# Establecemos la imagen base con Python
-# De esta manera, evitamos tener que instalar manualmente Python.
-FROM python:latest
+FROM python:3.8-slim
 
-# Establecemos el directorio de trabajo en el contenedor,
-# es decir, a partir de ahora, trabajaremos sobre este directorio.
-# Debemos considerar que esto hará un cambio de directorio.
+# Instala las dependencias necesarias para psycopg2-binary
+RUN apt-get update && apt-get install -y libpq-dev gcc && apt-get clean
+
+# Copia los archivos de requisitos y los instala
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copia el resto de tu aplicación Flask al contenedor
+COPY . /app
 WORKDIR /app
 
-# Instalamos las dependencias de la aplicacion
-# En este caso, solo necesitaremos Flask y el conector a MySQL.
-RUN pip install Flask mysql-connector-python
-
-# Copiamos el codigo fuente de la aplicacion al contenedor
-# Esto incluye tanto el archivo app.py como formulario.html
-COPY server.py app/
-RUN mkdir -p app/templates
-COPY templates/index.html app/templates/
-
-# Exponemos el puerto 5000 para Flask
-# Esto no abre el puerto, simplemente es una forma de documentacion,
-# Explica que el puerto está abierto.
+# Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 5000
 
-# Finalmente, declaramos el comando a ejecutar por defecto al lanzar el contenedor.
-# Comando por defecto al ejecutar el contenedor
-CMD ["python", "app/server.py"]
+# El comando para iniciar la aplicación
+CMD ["python", "app.py"]

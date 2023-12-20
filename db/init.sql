@@ -1,18 +1,14 @@
--- init.sql
+-- init.sql para PostgreSQL
 -- Crea la base de datos
 
-CREATE DATABASE IF NOT EXISTS mydatabase;
-USE mydatabase;
-
--- Crea una tabla
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS usuarios (
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(50)
 );
 
 -- Crea una tabla de direcciones
-CREATE TABLE direcciones (
-    direcciones_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS direcciones (
+    direcciones_id SERIAL PRIMARY KEY,
     usuario_id INT,
     direccion VARCHAR(100),
     ciudad VARCHAR(50),
@@ -22,8 +18,8 @@ CREATE TABLE direcciones (
 );
 
 -- Crea una tabla de pedidos
-CREATE TABLE pedidos (
-    pedidos_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS pedidos (
+    pedidos_id SERIAL PRIMARY KEY,
     usuario_id INT,
     fecha_pedido DATE,
     detalles_pedido TEXT,

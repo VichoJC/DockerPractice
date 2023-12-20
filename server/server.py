@@ -1,23 +1,23 @@
 from flask import Flask, request, render_template
 import logging as log
-import mysql.connector
+import psycopg2
 
 log.basicConfig(level=log.INFO)
 
 app = Flask(__name__)
 
-# Configura la conexion a la base de datos MySQL
+# Configura la conexion a la base de datos PostgreSQL
 db_config = {
-    'host': 'mysql', # Definido en el docker-compose en seccion posterior
-    'user': 'root',
-    'password': 'ejemplo',
-    'database': 'mydatabase'
+    'host': 'postgres',  # Definido en el docker-compose en seccion posterior
+    'dbname': 'mydatabase',
+    'user': 'test',  # Asegúrate de usar las credenciales correctas
+    'password': 'ejemplo'
 }
 
 def store_data_db(data):
     try:
-        # Conecta a la base de datos MySQL
-        conn = mysql.connector.connect(**db_config)
+        # Conecta a la base de datos PostgreSQL
+        conn = psycopg2.connect(**db_config)
         cursor = conn.cursor()
 
         # Inserta los datos en la tabla usuarios
@@ -25,10 +25,11 @@ def store_data_db(data):
 
         # Realiza commit y cierra la conexion
         conn.commit()
+        cursor.close()
         conn.close()
         log.info("Successfully registered")
-    except:
-        log.warning("Could not insert in database %s (Database may not be ready):" % (data))
+    except Exception as e:
+        log.warning(f"Could not insert in database {data} (Database may not be ready): {e}")
 
 @app.route('/')
 def index():
