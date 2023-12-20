@@ -45,7 +45,7 @@ def formulario():
         # Llama a la funcion para almacenar datos en la base de datos
         store_data_db(nombre)
 
-        mensaje = f"Hola, {nombre}. Bienvenido a mi app web."
+        mensaje = f"Hola, {nombre}. Gracias por haber rellenado el formulario. Bienvenido a mi app web."
         return mensaje
 
 if __name__ == '__main__':
